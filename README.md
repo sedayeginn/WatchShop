@@ -7,7 +7,8 @@
  ## Web
 
  ## Infrastructure
-
+ Install-package Microsoft.EntityFrameworkCore
+ Install-package Npsql.EntityFrameworkCore.PostgreSQL
  ## ApplicationCore
 
  Install-package Ardalis.Specification
