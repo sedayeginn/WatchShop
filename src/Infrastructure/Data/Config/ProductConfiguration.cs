@@ -18,7 +18,7 @@ namespace Infrastructure.Data.Config
                 .HasMaxLength(100);
 
             builder.Property(x => x.Price)
-                .HasColumnType("decimal(18,2");
+                .HasColumnType("decimal(18,2)");
 
             builder.HasOne(x => x.Category)
                 .WithMany()
