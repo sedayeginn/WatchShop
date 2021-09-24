@@ -72,7 +72,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2");
+                        .HasColumnType("numeric(18,2)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
