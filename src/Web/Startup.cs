@@ -27,6 +27,7 @@ namespace Web
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ApplicationDbContext")));
             services.AddDatabaseDeveloperPageExceptionFilter();  //2 ayrý veritabaný kullandýk
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddControllersWithViews();
         }
