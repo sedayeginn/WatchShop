@@ -27,6 +27,7 @@ namespace Web
                 await ApplicationDbContextSeed.SeedAsync(appDbContext);
             }
             host.Run();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

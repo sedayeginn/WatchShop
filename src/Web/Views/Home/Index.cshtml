@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +7,23 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="row">
+    @foreach (var item in Model.Products)
+    {
+        <div class="col-sm-6 col-lg-4 ">
+            <div class="card md-3">
+                <img class="card-img-top product-image" src="~/Images/Products/@item.PictureUri" alt="@item.ProductName" />
+                <div class="card-body">
+                    <h6 class="card-title product-name">@item.ProductName</h6>
+                    <p class="card-text d-flex justify-content-between align-items-end">
+                        <span class="h5"> @item.Price.ToString("$0.00")</span>
+                        <a href="#" class="btn btn btn-success" title="Add To Basket"><i class="fas fa-cart-plus"></i></a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
