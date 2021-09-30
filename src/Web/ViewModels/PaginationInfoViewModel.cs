@@ -7,7 +7,7 @@ namespace Web.ViewModels
 {
     public class PaginationInfoViewModel
     {
-        public int page { get; set; }
+        public int Page { get; set; }
         public int TotalPages { get; set; }
         public int TotalItems { get; set; }
         public int ItemsOnPage { get; set; }

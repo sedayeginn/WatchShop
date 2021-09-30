@@ -23,10 +23,13 @@ namespace Web.Services
             _categoryRepository = categoryRepository;
             _brandRepository = brandRepository;
         }
-        public async Task<HomeViewModel> GetHomeViewModelAsync(int? categoryId, int? brandId)
+        public async Task<HomeViewModel> GetHomeViewModelAsync(int? categoryId, int? brandId, int page)
         {
             var specProducts = new ProductsFilterSpecification(categoryId,brandId);
-            var products = await _productRepository.ListAsync(specProducts);
+            var totalItemsCount =await _productRepository.CountAsync(specProducts);
+            var totalPageCount = (int)Math.Ceiling((Decimal)totalItemsCount / Constants.ITEM_PER_PAGE);
+            var specPaginatedProducts = new ProductsFilterPaginatedSpecification(categoryId, brandId, (page - 1) * Constants.ITEM_PER_PAGE, Constants.ITEM_PER_PAGE);
+            var products = await _productRepository.ListAsync(specPaginatedProducts);
 
             var vm = new HomeViewModel()
             {
@@ -39,8 +42,17 @@ namespace Web.Services
                 }).ToList(),
                 Categories = await GetCategoriesAsync(),
                 Brands = await GetBrandsAsync(),
-                CategoryId=categoryId,
-                BrandId=brandId
+                CategoryId = categoryId,
+                BrandId = brandId,
+                PaginationInfo = new PaginationInfoViewModel()
+                {
+                    Page = page,
+                    TotalItems = totalItemsCount,
+                    TotalPages =totalPageCount,
+                    ItemsOnPage = products.Count,
+                    HasPrevious = page > 1,
+                    HasNext=page<totalItemsCount
+                }
             };
 
             return vm;

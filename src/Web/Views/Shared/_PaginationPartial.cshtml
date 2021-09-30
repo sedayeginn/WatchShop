@@ -1,0 +1,39 @@
+﻿@model PaginationInfoViewModel
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.HasPrevious ? "" : "disabled")">
+            <a class="page-link" asp-all-route-data="GetRouteData(Model.Page - 1)">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-all-route-data="GetRouteData(i)">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(Model.HasNext ? "" : "disabled")">
+            <a class="page-link" asp-all-route-data="GetRouteData(Model.Page + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+
+
+
+@{
+    Dictionary<string, string> GetRouteData(int page)
+    {
+        var routeData = new Dictionary<string, string>();
+
+        foreach (var item in Context.Request.Query)
+        {
+            if (item.Key == "page") continue;
+            routeData.Add(item.Key, item.Value.ToString());
+        }
+
+        routeData.Add("page", page.ToString());
+        return routeData;
+    }
+}
