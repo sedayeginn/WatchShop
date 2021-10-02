@@ -14,14 +14,6 @@
     </form>
     </div>
 </div>
-<p>
-    @Model.PaginationInfo.Page nolu sayfadayız.
-    @Model.PaginationInfo.TotalPages toplam sayfa vardır.
-    @Model.PaginationInfo.TotalItems toplam öge vardır.
-    @Model.PaginationInfo.ItemsOnPage adet öge gösteriliyor.
-    @(Model.PaginationInfo.HasPrevious ? "Öncesi vardır." : "Öncesi yoktur")
-    @(Model.PaginationInfo.HasNext ? "Sonrası vardır." : "Sonrası yoktur.")
-</p>
 
 <div class="row mt-3">
     @foreach (var item in Model.Products)
@@ -33,7 +25,7 @@
                     <h6 class="card-title product-name">@item.ProductName</h6>
                     <p class="card-text d-flex justify-content-between align-items-end">
                         <span class="h5"> @item.Price.ToString("$0.00")</span>
-                        <a href="#" class="btn btn btn-success" title="Add To Basket"><i class="fas fa-cart-plus"></i></a>
+                        <a data-add-item-to-basket="@item.Id" href="#" class="btn btn btn-success" title="Add To Basket"><i class="fas fa-cart-plus"></i></a>
 
                     </p>
                 </div>
@@ -42,4 +34,14 @@
     }
 </div>
 <partial name="_PaginationPartial" model="Model.PaginationInfo" />
+
+@section Scripts {
+<script>
+    $("[data-add-item-to-basket]").click(function (event) {
+        event.preventDefault();
+        var id = $(this).data("add-item-to-basket");
+        alert(id);
+    })
+</script>
+}
 
