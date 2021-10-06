@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Web</title>
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -27,14 +28,7 @@
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="#" class="btn btn-sm btn-success">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span class="badge badge-light ml-1"></span>
-                            </a>
-                        </li>
-                    </ul>
+                    <vc:navbar-basket />
                 </div>
             </div>
         </nav>
@@ -52,6 +46,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

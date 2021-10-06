@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Specifications
 {
-   public class BasketWithItemSpecification :Specification<Basket>
+    public class BasketItemsSpecification : Specification<BasketItem>
     {
-        public BasketWithItemSpecification(int basketId)
+        public BasketItemsSpecification(int basketId)
         {
-            Query
-                .Include(x=>x.Items)
-                .Where(x => x.Id == basketId);
+            Query.Where(x => x.BasketId == basketId);
         }
     }
 }

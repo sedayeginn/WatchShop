@@ -1,0 +1,156 @@
+﻿@model BasketViewModel
+@{
+    ViewBag.Title = "Basket";
+    string message = null;
+    if ((string)TempData["result"] == "UpdateSuccess")
+        message = "The basket has been updated successfully.";
+    else if ((string)TempData["result"] == "RemoveSuccess")
+        message = "The item has been removed successfully.";
+}
+
+<form asp-controller="Basket" asp-action="Update" method="post">
+
+    <!--Section: Block Content-->
+    <section>
+
+        <!--Grid row-->
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-lg-8">
+
+                <!-- Card -->
+                <div class="mb-3">
+                    <div class="pt-4 wish-list">
+
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h5 class="mb-4">Cart (<span>@Model.Items.Count</span> items)</h5>
+
+                            <div>
+                                <a href="#" class="btn btn-sm btn-danger" onclick="emptyCart()">Empty Cart</a>
+                                <button class="btn btn-sm btn-success ml-2">Update Cart</button>
+                            </div>
+                        </div>
+
+                        @if (Model.Items.Count == 0)
+                        {
+                            <div class="card">
+                                <div class="card-body text-center py-5">
+                                    <div class="text-secondary empty-basket-icon">
+                                        <i class="fas fa-shopping-basket"></i>
+                                    </div>
+                                    <p class="mt-1">
+                                        Your cart is empty.
+                                    </p>
+                                </div>
+                            </div>
+                        }
+
+                        @foreach (var item in Model.Items)
+                        {
+                            <div class="row mb-4">
+                                <div class="col-md-3 col-lg-2 col-xl-2">
+                                    <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                                        <img class="img-fluid w-100"
+                                             src="~/images/products/@item.PictureUri" alt="Sample">
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-lg-10 col-xl-10">
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h5>@item.ProductName</h5>
+                                                <p class="mb-3 text-muted text-uppercase small">Unit Price: @item.Price.ToString("$0.00")</p>
+                                            </div>
+                                            <div>
+                                                <div class="def-number-input number-input safari_only mb-0">
+                                                    <input class="quantity" min="1" name="quantities[@item.Id]" value="@item.Quantity" type="number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3" onclick="removeItem(@item.Id)">
+                                                    <i class="fas fa-trash-alt mr-1"></i> Remove item
+                                                </a>
+                                                <a href="#!" type="button" class="card-link-secondary small text-uppercase">
+                                                    <i class="fas fa-heart mr-1"></i> Move to wish list
+                                                </a>
+                                            </div>
+                                            <p class="mb-0"><span><strong id="summary">$@item.Price.ToString("n2")</strong></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                        }
+                    </div>
+                </div>
+                <!-- Card -->
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-lg-4 pl-5">
+
+                <!-- Card -->
+                <div class="mb-3">
+                    <div class="pt-4">
+
+                        <h5 class="mb-3">Total Price</h5>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                Subtotal
+                                <span>$@Model.TotalPrice.ToString("n2")</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                Shipping
+                                <span>Free</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                <div>
+                                    <strong>The total amount of</strong>
+                                    <strong>
+                                        <p class="mb-0">(including KDV)</p>
+                                    </strong>
+                                </div>
+                                <span><strong>$@Model.TotalPrice.ToString("n2")</strong></span>
+                            </li>
+                        </ul>
+
+                        <button type="button" class="btn btn-primary btn-block">Go To Checkout</button>
+
+                    </div>
+                </div>
+                <!-- Card -->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!-- Grid row -->
+
+    </section>
+    <!--Section: Block Content-->
+</form>
+
+<form id="frmRemoveItem" asp-controller="Basket" asp-action="RemoveItem" method="post">
+    <input type="hidden" id="basketItemId" name="basketItemId" value="" />
+</form>
+
+<form id="frmDelete" asp-controller="Basket" asp-action="Delete" method="post"></form>
+
+@section Scripts {
+    <script>
+        function removeItem(itemId) {
+            $("#basketItemId").val(itemId);
+            $("#frmRemoveItem").submit();
+        }
+        function emptyCart() {
+            $("#frmDelete").submit();
+        }
+        var message = "@message";
+        if (message)
+            toastr.success(message, "Success", { positionClass: "toast-bottom-right" });
+    </script>
+}
