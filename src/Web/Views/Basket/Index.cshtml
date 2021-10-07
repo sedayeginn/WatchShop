@@ -60,7 +60,7 @@
                                         <div class="d-flex justify-content-between">
                                             <div>
                                                 <h5>@item.ProductName</h5>
-                                                <p class="mb-3 text-muted text-uppercase small">Unit Price: @item.Price.ToString("$0.00")</p>
+                                                <p class="mb-3 text-muted text-uppercase small">Unit Price: @item.UnitPrice.ToString("$0.00")</p>
                                             </div>
                                             <div>
                                                 <div class="def-number-input number-input safari_only mb-0">
@@ -77,7 +77,7 @@
                                                     <i class="fas fa-heart mr-1"></i> Move to wish list
                                                 </a>
                                             </div>
-                                            <p class="mb-0"><span><strong id="summary">$@item.Price.ToString("n2")</strong></span></p>
+                                            <p class="mb-0"><span><strong id="summary">$@item.TotalPrice.ToString("n2")</strong></span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                             </li>
                         </ul>
 
-                        <button type="button" class="btn btn-primary btn-block">Go To Checkout</button>
+                        <a asp-controller="Basket" asp-action="CheckOut" class="btn btn-primary btn-block">Go To Checkout</a>
 
                     </div>
                 </div>

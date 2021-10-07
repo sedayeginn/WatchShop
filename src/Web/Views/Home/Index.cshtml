@@ -50,7 +50,7 @@
             data: { productId: id, quantity: 1 },
             success: function (data) {
                 $("#navbarBasketItemsCount").text(data.itemsCount);
-                toastr.success("Item has been added to the basket.", "Success", { positionClass: "toast-bottom-right" });
+                toastr.success("Item has been added to the basket.", "Success", { positionClass:"toast-bottom-right" });
             }
         });
     });

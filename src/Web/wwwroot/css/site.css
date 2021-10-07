@@ -90,3 +90,20 @@ body {
  .product-image:hover {
     padding: .2rem;
  }
+/* BASKET START */
+.number-input > .quantity {
+    width: 70px;
+}
+
+.empty-basket-icon {
+    font-size: 48px;
+}
+/* BASKET END   */
+
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summary-errors > ul {
+    margin-bottom: 0;
+}

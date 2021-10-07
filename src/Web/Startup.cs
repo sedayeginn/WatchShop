@@ -32,6 +32,7 @@ namespace Web
             //belirli bir türle (T) IAsyncRepository generic olarak talep edildiðinde 
             //ayný türle efrepository<T> hizmeti enjekte edilecektir.
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EFRepository<>));
+            services.AddScoped<IOrderService, OrderService > ();
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IHomeViewModelService, HomeViewModelService>();
             services.AddScoped<IBasketViewModelService, BasketViewModelService>();
