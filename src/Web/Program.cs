@@ -23,8 +23,8 @@ namespace Web
                 var appDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                await AppIdentityDbContextSeed.SeedAsync(roleManager, userManager);
                 await ApplicationDbContextSeed.SeedAsync(appDbContext);
+                await AppIdentityDbContextSeed.SeedAsync(roleManager, userManager);
             }
             host.Run();
 
