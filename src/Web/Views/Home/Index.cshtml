@@ -44,13 +44,14 @@
     $("[data-add-item-to-basket]").click(function (event) {
         event.preventDefault();
         var id = $(this).data("add-item-to-basket");
+
         $.ajax({
             url: "@Url.Action("AddItem", "Basket")",
             type: "POST",
             data: { productId: id, quantity: 1 },
             success: function (data) {
                 $("#navbarBasketItemsCount").text(data.itemsCount);
-                toastr.success("Item has been added to the basket.", "Success", { positionClass:"toast-bottom-right" });
+                toastr.success("Item has been added to the basket.", "Success", { positionClass: "toast-bottom-right" });
             }
         });
     });

@@ -17,6 +17,10 @@
  ## ApplicationCore
 
  Install-package Ardalis.Specification
+
+ ## UnitTests
+ Install-package Moq
+
  ## EF Commands
 
  Default project : src\infrastructure

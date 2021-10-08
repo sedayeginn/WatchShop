@@ -118,7 +118,7 @@
                             </li>
                         </ul>
 
-                        <a asp-controller="Basket" asp-action="CheckOut" class="btn btn-primary btn-block">Go To Checkout</a>
+                        <a asp-controller="Basket" asp-action="Checkout" class="btn btn-primary btn-block">Go To Checkout</a>
 
                     </div>
                 </div>
@@ -146,10 +146,13 @@
             $("#basketItemId").val(itemId);
             $("#frmRemoveItem").submit();
         }
+
         function emptyCart() {
             $("#frmDelete").submit();
         }
+
         var message = "@message";
+
         if (message)
             toastr.success(message, "Success", { positionClass: "toast-bottom-right" });
     </script>
